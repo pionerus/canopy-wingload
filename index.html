@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skydive Canopy Wingload Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🪂 Canopy Wingload Calculator</h1>
+            <p class="subtitle">Calculate your wing loading for safer skydiving</p>
+        </header>
+
+        <main>
+            <div class="calculator-card">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="jumper-weight">Jumper Weight: <span id="jumper-weight-value">70</span> kg</label>
+                        <input type="range" id="jumper-weight" min="40" max="150" value="70" step="0.5" class="slider">
+                        <small>Your body weight without gear</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="gear-weight">Gear Weight: <span id="gear-weight-value">15</span> kg</label>
+                        <input type="range" id="gear-weight" min="5" max="30" value="15" step="0.5" class="slider">
+                        <small>Rig, parachute, and other equipment</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="canopy-size">Canopy Size: <span id="canopy-size-value">20</span> sq m</label>
+                        <input type="range" id="canopy-size" min="8" max="35" value="20" step="0.1" class="slider">
+                        <small>Your canopy's size in square meters</small>
+                    </div>
+
+                    <button id="calculate-btn" class="calculate-btn">Calculate Wingload</button>
+                </div>
+
+                <div class="result-section" id="result-section" style="display: none;">
+                    <div class="result-card">
+                        <h2>Your Wingload</h2>
+                        <div class="wingload-value" id="wingload-value">0.00</div>
+                        <div class="wingload-unit">kg/sq m</div>
+                        <div class="wingload-breakdown" id="wingload-breakdown"></div>
+                    </div>
+
+                    <div class="info-card" id="info-card">
+                        <h3>Wingload Information</h3>
+                        <div class="info-content" id="info-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reference-card">
+                <h3>Wingload Reference Guide</h3>
+                <div class="reference-table">
+                    <div class="reference-row">
+                        <span class="range-label">Low</span>
+                        <span class="range-value">&lt; 4.9 kg/sq m</span>
+                        <span class="range-desc">Conservative, suitable for students</span>
+                    </div>
+                    <div class="reference-row">
+                        <span class="range-label">Moderate</span>
+                        <span class="range-value">4.9 - 7.3 kg/sq m</span>
+                        <span class="range-desc">Recreational skydivers</span>
+                    </div>
+                    <div class="reference-row">
+                        <span class="range-label">High</span>
+                        <span class="range-value">7.3 - 9.8 kg/sq m</span>
+                        <span class="range-desc">Experienced skydivers</span>
+                    </div>
+                    <div class="reference-row">
+                        <span class="range-label">Very High</span>
+                        <span class="range-value">&gt; 9.8 kg/sq m</span>
+                        <span class="range-desc">Expert level, high performance</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>⚠️ Always consult with certified instructors before making gear decisions</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
