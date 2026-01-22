@@ -17,21 +17,21 @@
             <div class="calculator-card">
                 <div class="input-section">
                     <div class="input-group">
-                        <label for="jumper-weight">Jumper Weight: <span id="jumper-weight-value">70</span> kg</label>
-                        <input type="range" id="jumper-weight" min="40" max="150" value="70" step="0.5" class="slider">
+                        <label for="jumper-weight">Jumper Weight: <span id="jumper-weight-value">82</span> kg</label>
+                        <input type="range" id="jumper-weight" min="40" max="120" value="82" step="1" class="slider">
                         <small>Your body weight without gear</small>
                     </div>
 
                     <div class="input-group">
-                        <label for="gear-weight">Gear Weight: <span id="gear-weight-value">15</span> kg</label>
-                        <input type="range" id="gear-weight" min="5" max="30" value="15" step="0.5" class="slider">
+                        <label for="gear-weight">Equipment Weight: <span id="gear-weight-value">10</span> kg</label>
+                        <input type="range" id="gear-weight" min="8" max="14" value="10" step="1" class="slider">
                         <small>Rig, parachute, and other equipment</small>
                     </div>
 
                     <div class="input-group">
-                        <label for="canopy-size">Canopy Size: <span id="canopy-size-value">20</span> sq m</label>
-                        <input type="range" id="canopy-size" min="8" max="35" value="20" step="0.1" class="slider">
-                        <small>Your canopy's size in square meters</small>
+                        <label for="canopy-size">Canopy Size: <span id="canopy-size-value">131</span> sq ft</label>
+                        <input type="range" id="canopy-size" min="90" max="260" value="131" step="1" class="slider">
+                        <small>Your canopy's size in square feet</small>
                     </div>
 
                     <button id="calculate-btn" class="calculate-btn">Calculate Wingload</button>
@@ -41,7 +41,7 @@
                     <div class="result-card">
                         <h2>Your Wingload</h2>
                         <div class="wingload-value" id="wingload-value">0.00</div>
-                        <div class="wingload-unit">kg/sq m</div>
+                        <div class="wingload-unit">lbs/sq ft</div>
                         <div class="wingload-breakdown" id="wingload-breakdown"></div>
                     </div>
 
@@ -56,24 +56,24 @@
                 <h3>Wingload Reference Guide</h3>
                 <div class="reference-table">
                     <div class="reference-row">
-                        <span class="range-label">Low</span>
-                        <span class="range-value">&lt; 4.9 kg/sq m</span>
-                        <span class="range-desc">Conservative, suitable for students</span>
+                        <span class="range-label">Basic</span>
+                        <span class="range-value">&lt; 1.1 lbs/sq ft</span>
+                        <span class="range-desc">Recommended minimum: 0+ jumps</span>
                     </div>
                     <div class="reference-row">
-                        <span class="range-label">Moderate</span>
-                        <span class="range-value">4.9 - 7.3 kg/sq m</span>
-                        <span class="range-desc">Recreational skydivers</span>
+                        <span class="range-label">Intermediate</span>
+                        <span class="range-value">1.1 - 1.5 lbs/sq ft</span>
+                        <span class="range-desc">Recommended minimum: 200+ jumps</span>
                     </div>
                     <div class="reference-row">
-                        <span class="range-label">High</span>
-                        <span class="range-value">7.3 - 9.8 kg/sq m</span>
-                        <span class="range-desc">Experienced skydivers</span>
+                        <span class="range-label">Advanced</span>
+                        <span class="range-value">1.5 - 1.9 lbs/sq ft</span>
+                        <span class="range-desc">Recommended minimum: 600+ jumps</span>
                     </div>
                     <div class="reference-row">
-                        <span class="range-label">Very High</span>
-                        <span class="range-value">&gt; 9.8 kg/sq m</span>
-                        <span class="range-desc">Expert level, high performance</span>
+                        <span class="range-label">Expert</span>
+                        <span class="range-value">&gt; 1.9 lbs/sq ft</span>
+                        <span class="range-desc">Recommended minimum: 1500+ jumps</span>
                     </div>
                 </div>
             </div>

@@ -18,77 +18,98 @@ function updateSliderBackground(slider) {
     const max = parseFloat(slider.max);
     const value = parseFloat(slider.value);
     const percentage = ((value - min) / (max - min)) * 100;
-    slider.style.background = `linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) ${percentage}%, var(--border-color) ${percentage}%, var(--border-color) 100%)`;
+    slider.style.background = `linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) ${percentage}%, #e2e8f0 ${percentage}%, #e2e8f0 100%)`;
 }
 
 // Update slider value displays in real-time
 jumperWeightInput.addEventListener('input', (e) => {
-    jumperWeightValue.textContent = parseFloat(e.target.value).toFixed(1);
+    const kg = parseFloat(e.target.value);
+    const lbs = (kg * 2.20462).toFixed(0);
+    jumperWeightValue.textContent = `${kg} kg (${lbs} lbs)`;
     updateSliderBackground(e.target);
 });
 
 gearWeightInput.addEventListener('input', (e) => {
-    gearWeightValue.textContent = parseFloat(e.target.value).toFixed(1);
+    const kg = parseFloat(e.target.value);
+    const lbs = (kg * 2.20462).toFixed(0);
+    gearWeightValue.textContent = `${kg} kg (${lbs} lbs)`;
     updateSliderBackground(e.target);
 });
 
 canopySizeInput.addEventListener('input', (e) => {
-    canopySizeValue.textContent = parseFloat(e.target.value).toFixed(1);
+    canopySizeValue.textContent = e.target.value;
     updateSliderBackground(e.target);
 });
 
-// Initialize slider backgrounds
+// Initialize slider backgrounds and display values
 updateSliderBackground(jumperWeightInput);
 updateSliderBackground(gearWeightInput);
 updateSliderBackground(canopySizeInput);
 
+// Initialize display values
+const initJumperKg = parseFloat(jumperWeightInput.value);
+jumperWeightValue.textContent = `${initJumperKg} kg (${(initJumperKg * 2.20462).toFixed(0)} lbs)`;
+
+const initGearKg = parseFloat(gearWeightInput.value);
+gearWeightValue.textContent = `${initGearKg} kg (${(initGearKg * 2.20462).toFixed(0)} lbs)`;
+
+canopySizeValue.textContent = canopySizeInput.value;
+
 // Calculate wingload
 function calculateWingload() {
-    const jumperWeight = parseFloat(jumperWeightInput.value) || 0;
-    const gearWeight = parseFloat(gearWeightInput.value) || 0;
-    const canopySize = parseFloat(canopySizeInput.value) || 0;
+    const jumperWeightKg = parseFloat(jumperWeightInput.value) || 0;
+    const gearWeightKg = parseFloat(gearWeightInput.value) || 0;
+    const canopySizeSqFt = parseFloat(canopySizeInput.value) || 0;
 
     // Validation
-    if (jumperWeight <= 0 || gearWeight < 0 || canopySize <= 0) {
+    if (jumperWeightKg <= 0 || gearWeightKg < 0 || canopySizeSqFt <= 0) {
         alert('Please enter valid values for all fields.');
         return;
     }
 
-    const totalWeight = jumperWeight + gearWeight;
-    const wingload = totalWeight / canopySize;
+    // Convert total weight from kg to lbs
+    const totalWeightKg = jumperWeightKg + gearWeightKg;
+    const totalWeightLbs = totalWeightKg * 2.20462;
+    
+    // Calculate wing loading in lbs/sq ft
+    const wingload = totalWeightLbs / canopySizeSqFt;
 
     // Display results
     wingloadValue.textContent = wingload.toFixed(2);
     
     // Display breakdown
     wingloadBreakdown.innerHTML = `
-        <div><strong>Total Weight:</strong> ${totalWeight.toFixed(1)} kg</div>
-        <div><strong>Canopy Size:</strong> ${canopySize.toFixed(1)} sq m</div>
+        <div><strong>Total Weight:</strong> ${totalWeightKg.toFixed(1)} kg (${totalWeightLbs.toFixed(1)} lbs)</div>
+        <div><strong>Canopy Size:</strong> ${canopySizeSqFt.toFixed(0)} sq ft</div>
     `;
 
-    // Determine wingload category and display info (in kg/sq m)
-    let category, categoryClass, description, advice;
+    // Determine wingload category and display info (in lbs/sq ft)
+    let category, categoryClass, description, advice, jumps;
     
-    if (wingload < 4.9) {
-        category = 'Low';
+    if (wingload < 1.1) {
+        category = 'BASIC';
         categoryClass = 'wingload-low';
-        description = 'Conservative wing loading';
-        advice = 'This is a conservative wing loading suitable for students and novice jumpers. Your canopy will have slower forward speed and more forgiving flight characteristics. Great for building skills and confidence.';
-    } else if (wingload >= 4.9 && wingload < 7.3) {
-        category = 'Moderate';
+        jumps = 0;
+        description = 'Basic wing loading';
+        advice = 'This is a basic wing loading suitable for students and novice jumpers. Your canopy will have slower forward speed and more forgiving flight characteristics. Great for building skills and confidence.';
+    } else if (wingload >= 1.1 && wingload < 1.5) {
+        category = 'INTERMEDIATE';
         categoryClass = 'wingload-moderate';
-        description = 'Recreational wing loading';
-        advice = 'This is a moderate wing loading suitable for most recreational skydivers. Good balance between performance and safety. Suitable for experienced jumpers comfortable with their canopy skills.';
-    } else if (wingload >= 7.3 && wingload < 9.8) {
-        category = 'High';
+        jumps = 200;
+        description = 'Intermediate wing loading';
+        advice = 'This is an intermediate wing loading suitable for recreational skydivers. Good balance between performance and safety. Recommended minimum: 200+ jumps.';
+    } else if (wingload >= 1.5 && wingload < 1.9) {
+        category = 'ADVANCED';
         categoryClass = 'wingload-high';
-        description = 'High performance wing loading';
-        advice = 'This is a high wing loading requiring advanced canopy skills. Your canopy will have increased forward speed and requires more precise control. Only recommended for experienced jumpers with extensive canopy control experience.';
+        jumps = 600;
+        description = 'Advanced wing loading';
+        advice = 'This is an advanced wing loading requiring advanced canopy skills. Your canopy will have increased forward speed and requires more precise control. Recommended minimum: 600+ jumps.';
     } else {
-        category = 'Very High';
+        category = 'EXPERT';
         categoryClass = 'wingload-high';
+        jumps = 1500;
         description = 'Expert level wing loading';
-        advice = '⚠️ This is a very high wing loading suitable only for expert skydivers. Requires excellent canopy skills, precise timing, and advanced decision-making. Higher risk of injury if not handled properly. Always consult with instructors before jumping at this wing loading.';
+        advice = '⚠️ This is an expert level wing loading suitable only for expert skydivers. Requires excellent canopy skills, precise timing, and advanced decision-making. Higher risk of injury if not handled properly. Recommended minimum: 1500+ jumps. Always consult with instructors before jumping at this wing loading.';
     }
 
     // Update info card
@@ -96,6 +117,9 @@ function calculateWingload() {
     infoContent.innerHTML = `
         <div style="margin-bottom: 0.75rem;">
             <strong>Category:</strong> ${category}
+        </div>
+        <div style="margin-bottom: 0.75rem;">
+            <strong>Recommended minimum:</strong> ${jumps}+ jumps
         </div>
         <div style="margin-bottom: 0.75rem;">
             <strong>Description:</strong> ${description}
