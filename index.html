@@ -3,85 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skydive Canopy Wingload Calculator</title>
+    <title>Wing Load Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🪂 Canopy Wingload Calculator</h1>
-            <p class="subtitle">Calculate your wing loading for safer skydiving</p>
-        </header>
+    <div class="calculator-wrapper">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Wing Loading Calculator</h1>
 
-        <main>
-            <div class="calculator-card">
-                <div class="input-section">
-                    <div class="input-group">
-                        <label for="jumper-weight">Jumper Weight: <span id="jumper-weight-value">82</span> kg</label>
-                        <input type="range" id="jumper-weight" min="40" max="120" value="82" step="1" class="slider">
-                        <small>Your body weight without gear</small>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="gear-weight">Equipment Weight: <span id="gear-weight-value">10</span> kg</label>
-                        <input type="range" id="gear-weight" min="8" max="14" value="10" step="1" class="slider">
-                        <small>Rig, parachute, and other equipment</small>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="canopy-size">Canopy Size: <span id="canopy-size-value">131</span> sq ft</label>
-                        <input type="range" id="canopy-size" min="90" max="260" value="131" step="1" class="slider">
-                        <small>Your canopy's size in square feet</small>
-                    </div>
-
-                    <button id="calculate-btn" class="calculate-btn">Calculate Wingload</button>
+            <div class="input-group">
+                <div class="input-header">
+                    <label for="body-weight">Your weight (kg):</label>
+                    <span class="input-value" id="body-weight-display">82 kg (181 lbs)</span>
                 </div>
+                <input type="range" id="body-weight" min="40" max="150" value="82" step="1" class="slider">
+            </div>
 
-                <div class="result-section" id="result-section" style="display: none;">
-                    <div class="result-card">
-                        <h2>Your Wingload</h2>
-                        <div class="wingload-value" id="wingload-value">0.00</div>
-                        <div class="wingload-unit">lbs/sq ft</div>
-                        <div class="wingload-breakdown" id="wingload-breakdown"></div>
-                    </div>
+            <div class="input-group">
+                <div class="input-header">
+                    <label for="equipment-weight">Equipment weight (kg):</label>
+                    <span class="input-value" id="equipment-weight-display">10 kg (22 lbs)</span>
+                </div>
+                <input type="range" id="equipment-weight" min="5" max="25" value="10" step="1" class="slider">
+            </div>
 
-                    <div class="info-card" id="info-card">
-                        <h3>Wingload Information</h3>
-                        <div class="info-content" id="info-content"></div>
+            <div class="input-group">
+                <div class="input-header">
+                    <label for="canopy-size">Canopy size (sq ft):</label>
+                    <span class="input-value" id="canopy-size-display">131 sq ft</span>
+                </div>
+                <input type="range" id="canopy-size" min="70" max="300" value="131" step="1" class="slider">
+            </div>
+
+            <div class="result-section">
+                <div class="wingload-result" id="wingload-result">
+                    Wing loading: <span id="wingload-value">1.55</span>
+                </div>
+                <div class="wingload-slider-wrapper">
+                    <input type="range" id="wingload-slider" min="0" max="3" step="0.01" value="1.55" class="slider wingload-slider" disabled>
+                    <div class="wingload-scale">
+                        <span>0</span>
+                        <span>1.0</span>
+                        <span>2.0</span>
+                        <span>3.0</span>
                     </div>
                 </div>
             </div>
 
-            <div class="reference-card">
-                <h3>Wingload Reference Guide</h3>
-                <div class="reference-table">
-                    <div class="reference-row">
-                        <span class="range-label">Basic</span>
-                        <span class="range-value">&lt; 1.1 lbs/sq ft</span>
-                        <span class="range-desc">Recommended minimum: 0+ jumps</span>
-                    </div>
-                    <div class="reference-row">
-                        <span class="range-label">Intermediate</span>
-                        <span class="range-value">1.1 - 1.5 lbs/sq ft</span>
-                        <span class="range-desc">Recommended minimum: 200+ jumps</span>
-                    </div>
-                    <div class="reference-row">
-                        <span class="range-label">Advanced</span>
-                        <span class="range-value">1.5 - 1.9 lbs/sq ft</span>
-                        <span class="range-desc">Recommended minimum: 600+ jumps</span>
-                    </div>
-                    <div class="reference-row">
-                        <span class="range-label">Expert</span>
-                        <span class="range-value">&gt; 1.9 lbs/sq ft</span>
-                        <span class="range-desc">Recommended minimum: 1500+ jumps</span>
-                    </div>
-                </div>
+            <div class="level-banner" id="level-banner">
+                <span class="level-text" id="level-text">ADVANCED Recommended minimum: 600+ jumps</span>
             </div>
-        </main>
-
-        <footer>
-            <p>⚠️ Always consult with certified instructors before making gear decisions</p>
-        </footer>
+        </div>
     </div>
 
     <script src="script.js"></script>
